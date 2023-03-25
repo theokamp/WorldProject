@@ -1,3 +1,4 @@
+// JavaFX libraries
 import javafx.application.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -6,13 +7,14 @@ import javafx.scene.text.Font;
 import javafx.stage.*;
 import javafx.scene.control.*;
 
-import Forms.*;
+// Project libraries
+import forms.*;
 
 public class Main extends Application {
     Button btnCountry;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         btnCountry = new Button("Country");
         btnCountry.setFont(Font.font("Arial",13));
         btnCountry.setOnAction(e -> countryBtn());
