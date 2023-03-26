@@ -2,6 +2,7 @@ package utilities;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -22,6 +23,7 @@ public class ErrorMessage {
     public void show() {
         // initializing message label
         lblMsg = new Label(message);
+        lblMsg.setFont(Font.font("Arial",13));
 
         // initializing button
         okButton = new Button();

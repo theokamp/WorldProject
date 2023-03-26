@@ -19,10 +19,12 @@ public class CountryForm {
           lblLocalName, lblGovernmentForm, lblHeadOfState, lblCapital,
           lblCode2;
 
-    TextField txtCode, txtName, txtContinent, txtRegion, txtSurfaceArea,
+    TextField txtCode, txtName, txtRegion, txtSurfaceArea,
               txtIndependenceDay, txtPopulation, txtLifeExpectancy, txtGNP,
               txtLocalName, txtGovernmentForm, txtHeadOfState, txtCapital,
               txtCode2;
+
+    ComboBox<String> continentCombo;
 
     Button okButton;
 
@@ -36,58 +38,78 @@ public class CountryForm {
         lblCode = new Label("Code: ");
         lblCode.setFont(Font.font("Arial", 13));
         txtCode = new TextField();
+        txtCode.setFont(Font.font("Arial", 12));
 
         lblName = new Label("Name: ");
         lblName.setFont(Font.font("Arial", 13));
         txtName = new TextField();
+        txtName.setFont(Font.font("Arial", 12));
+
 
         lblContinent = new Label("Continent: ");
         lblContinent.setFont(Font.font("Arial", 13));
-        txtContinent = new TextField();
+        continentCombo = new ComboBox<>();
+        continentCombo.setEditable(true);
+        continentCombo.getItems().addAll("Asia", "Europe", "North America", "Africa", "Oceania",
+                                              "Antarctica", "South America");
+        continentCombo.setValue(continentCombo.getItems().get(0));
+        new AutoCompleteComboBoxListener<>(continentCombo);
+
 
         lblRegion = new Label("Region: ");
         lblRegion.setFont(Font.font("Arial", 13));
         txtRegion = new TextField();
+        txtRegion.setFont(Font.font("Arial", 12));
 
         lblSurfaceArea = new Label("Surface Area: ");
         lblSurfaceArea.setFont(Font.font("Arial", 13));
         txtSurfaceArea = new TextField();
+        txtSurfaceArea.setFont(Font.font("Arial", 12));
 
         lblIndependenceDay = new Label("Independence Day: ");
         lblIndependenceDay.setFont(Font.font("Arial", 13));
         txtIndependenceDay = new TextField();
+        txtIndependenceDay.setFont(Font.font("Arial", 12));
 
         lblPopulation = new Label("Population: ");
         lblPopulation.setFont(Font.font("Arial", 13));
         txtPopulation = new TextField();
+        txtPopulation.setFont(Font.font("Arial", 12));
 
         lblLifeExpectancy = new Label("Life Expectancy: ");
         lblLifeExpectancy.setFont(Font.font("Arial", 13));
         txtLifeExpectancy = new TextField();
+        txtLifeExpectancy.setFont(Font.font("Arial", 12));
 
         lblGNP = new Label("GNP: ");
         lblGNP.setFont(Font.font("Arial", 13));
         txtGNP = new TextField();
+        txtGNP.setFont(Font.font("Arial", 12));
 
         lblLocalName = new Label("Local Name: ");
         lblLocalName.setFont(Font.font("Arial", 13));
         txtLocalName = new TextField();
+        txtLocalName.setFont(Font.font("Arial", 12));
 
         lblGovernmentForm = new Label("Government Form: ");
         lblGovernmentForm.setFont(Font.font("Arial", 13));
         txtGovernmentForm = new TextField();
+        txtGovernmentForm.setFont(Font.font("Arial", 12));
 
         lblHeadOfState = new Label("Head Of State: ");
         lblHeadOfState.setFont(Font.font("Arial", 13));
         txtHeadOfState = new TextField();
+        txtHeadOfState.setFont(Font.font("Arial", 12));
 
         lblCapital = new Label("Capital: ");
         lblCapital.setFont(Font.font("Arial", 13));
         txtCapital = new TextField();
+        txtCapital.setFont(Font.font("Arial", 12));
 
         lblCode2 = new Label("Code 2: ");
         lblCode2.setFont(Font.font("Arial", 13));
         txtCode2 = new TextField();
+        txtCode2.setFont(Font.font("Arial", 12));
 
         // OK BUTTON INITIALIZATION
         okButton = new Button("OK");
@@ -104,7 +126,7 @@ public class CountryForm {
         nameBox.setAlignment(Pos.CENTER);
 
         HBox continentBox = new HBox();
-        continentBox.getChildren().addAll(lblContinent, txtContinent);
+        continentBox.getChildren().addAll(lblContinent, continentCombo);
         continentBox.setAlignment(Pos.CENTER);
 
         HBox regionBox = new HBox();
@@ -180,22 +202,18 @@ public class CountryForm {
         msg = "";
 
         // CODE CHECK
-        msg += txtCode.getText().length() > 3 ? "Code must be up to 3 characters\n"
-                : txtCode.getText().isEmpty() ? "Code can't be blank\n" : "";
+        msg += txtCode.getText().length() != 3 ? "Code must be 3 characters\n" : "";
 
         // NAME CHECK
         msg += txtName.getText().length() > 52 ? "Name must be up to 52 characters only\n"
                 : txtName.getText().isEmpty() ? "Name can't be blank\n" : "";
-
-        // CONTINENT
-        msg += txtContinent.getText().isEmpty() ? "Continent can't be blank\n" : "";
 
         // REGION
         msg += txtRegion.getText().length() > 26 ? "Region must be up to 26 characters\n"
                 : txtRegion.getText().isEmpty() ? "Region can't be blank\n" : "";
 
         // SURFACE AREA
-        double surfArea = 0.0;
+        Double surfArea = null;
         if (!txtSurfaceArea.getText().isEmpty()) {
             try {
                 surfArea = Double.parseDouble(txtSurfaceArea.getText());
@@ -206,36 +224,36 @@ public class CountryForm {
         }
 
         // INDEPENDENCE YEAR
-        int indYear = 0;
+        Integer indYear = null;
         if (!txtIndependenceDay.getText().isEmpty()) {
             try {
                 indYear = Integer.parseInt(txtIndependenceDay.getText());
+                if (indYear > 2023)
+                    msg += "Independence Year can't be bigger than current year\n";
             } catch (NumberFormatException e) {
                 msg += "Independence Year must be a valid year\n";
                 e.printStackTrace();
             }
-            if (indYear > 2023) {
-                msg += "Independence Year can't be bigger than current year\n";
-            }
         }
 
         // POPULATION
-        int pop = 0;
+        Integer pop = null;
         if (!txtPopulation.getText().isEmpty()) {
             try {
                 pop = Integer.parseInt(txtPopulation.getText());
+                if (pop > 2000000000)
+                    msg += "Population must be smaller than 2 billions\n";
             } catch (NumberFormatException e) {
                 msg += "Population must be a valid number\n";
                 e.printStackTrace();
             }
-            if (pop > 2000000000)
-                msg += "Population must be smaller than 2 billions\n";
+
         }
         else
             msg += "Population can't be blank\n";
 
         // LIFE EXPECTANCY
-        double lifeExp = 0.0;
+        Double lifeExp = null;
         if (!txtLifeExpectancy.getText().isEmpty()) {
             try {
                 lifeExp = Double.parseDouble(txtLifeExpectancy.getText());
@@ -246,7 +264,7 @@ public class CountryForm {
         }
 
         // GNP CHECK
-        double gnpNum = 0.0;
+        Double gnpNum = null;
         if (!txtGNP.getText().isEmpty()) {
             try {
                 gnpNum = Double.parseDouble(txtGNP.getText());
@@ -268,7 +286,7 @@ public class CountryForm {
         msg += txtHeadOfState.getText().length() > 60 ? "Head Of State must be up to 60 characters\n" : "";
 
         // CODE 2
-        msg += txtCode2.getText().length() > 2 ? "Code 2 must be up to 2 characters\n" : "";
+        msg += txtCode2.getText().length() != 2 ? "Code 2 must be 2 characters\n" : "";
 
         return msg.isEmpty();
     }
@@ -281,7 +299,7 @@ public class CountryForm {
         else {
             System.out.println("CODE             : " + txtCode.getText());
             System.out.println("NAME             : " + txtName.getText());
-            System.out.println("CONTINENT        : " + txtContinent.getText());
+            System.out.println("CONTINENT        : " + continentCombo.getValue());
             System.out.println("REGION           : " + txtRegion.getText());
             System.out.println("SURFACE AREA     : " + txtSurfaceArea.getText());
             System.out.println("INDEPENDENCE YEAR: " + txtIndependenceDay.getText());
