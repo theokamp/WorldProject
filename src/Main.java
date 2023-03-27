@@ -28,10 +28,10 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.setTitle("World Project");
-        stage.setX((Screen.getPrimary().getVisualBounds().getWidth()-700)/2);
-        stage.setY((Screen.getPrimary().getVisualBounds().getHeight()-500)/2);
-        stage.setWidth(700);
-        stage.setHeight(500);
+        stage.setX((Screen.getPrimary().getVisualBounds().getWidth()-800)/2);
+        stage.setY((Screen.getPrimary().getVisualBounds().getHeight()-800)/2);
+        stage.setWidth(800);
+        stage.setHeight(800);
         stage.show();
     }
 

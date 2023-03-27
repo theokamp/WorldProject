@@ -38,12 +38,14 @@ public class ErrorMessage {
         VBox pane = new VBox();
         pane.getChildren().addAll(lblMsg, okButton);
         pane.setAlignment(Pos.CENTER);
+        pane.setSpacing(10);
 
         // init scene
         Scene scene = new Scene(pane);
 
         // init stage
         stage = new Stage();
+        stage.setTitle(title);
         stage.setScene(scene);
         stage.setX((Screen.getPrimary().getVisualBounds().getWidth()-250)/2);
         stage.setY((Screen.getPrimary().getVisualBounds().getHeight()-250)/2);
