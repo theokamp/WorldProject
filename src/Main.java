@@ -9,12 +9,17 @@ import javafx.scene.control.*;
 
 // Project libraries
 import forms.*;
+import models.Country;
 
 public class Main extends Application {
+
     Button btnCountry;
+
+    Country aruba, afghanistan, angola, anguilla;
 
     @Override
     public void start(Stage stage) {
+
         btnCountry = new Button("Country");
         btnCountry.setFont(Font.font("Arial",13));
         btnCountry.setOnAction(e -> countryBtn());
