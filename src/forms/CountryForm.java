@@ -162,6 +162,7 @@ public class CountryForm {
         col1.setFillWidth(true);
         col1.setHgrow(Priority.ALWAYS);
         ColumnConstraints col2 = new ColumnConstraints();
+        col2.setFillWidth(true);
         col2.setHgrow(Priority.ALWAYS);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setHgrow(Priority.ALWAYS);
